@@ -49,6 +49,7 @@ function Expenses(props) {
                 amount={props.items[3].amount}
                 date={props.items[3].date}
             /> */}
+            {/* 참조 오류 블로깅하기 */}
         </Card>
     )
 
