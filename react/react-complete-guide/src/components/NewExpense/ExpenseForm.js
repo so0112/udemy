@@ -4,7 +4,7 @@ import '../../css/ExpenseForm.css'
 
 
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     // 1. state 1번 방법
     const [enteredTitle, setEnteredTitle] = useState('');
@@ -26,27 +26,44 @@ const ExpenseForm = () => {
         setEnteredDate(event.target.value);
     }
 
-    return (
-        <form>
-            <div className="new-expense__controls">
+    const submitHandler = (event) => {
+        event.preventDefault(); // 요청이 보내지는 것을 막음 (안 할 경우 페이지 로드가 진행)
 
+        const expenseData = {
+            title: enteredTitle,
+            amount: enteredAmount,
+            date: new Date(enteredDate),
+        };
+        // console.log(expenseData)
+
+        // 상위 컴포넌트에서 props로 전달된 함수
+        props.onSaveExpenseData(expenseData);
+
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
+
+
+    };
+
+    return (
+        <form onSubmit={submitHandler}>
+            <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label>Title</label>
-                    <input type='text' onChange={titleChangeHandler} />
+                    <input type='text' value={enteredTitle} onChange={titleChangeHandler} />
                 </div>
 
                 <div className="new-expense__control">
                     <label>Amount</label>
-                    <input type='number' min="0.01" step="0.01" onChange={amuntChangeHandler} />
+                    <input type='number' value={enteredAmount} min="0.01" step="0.01" onChange={amuntChangeHandler} />
                 </div>
 
 
                 <div className="new-expense__control">
                     <label>Title</label>
-                    <input type='date' min='2019-01-01' max="2022-12-31" onChange={dateChangeHandler} />
+                    <input type='date' value={enteredDate} min='2019-01-01' max="2022-12-31" onChange={dateChangeHandler} />
                 </div>
-
-
             </div>
 
             <div className="new-expense__actions">
