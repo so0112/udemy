@@ -4,7 +4,7 @@ import "../css/Expenses.css"
 
 function Expenses(props) {
 
-
+    console.log(props)
 
     return (
         <Card className="expenses">
@@ -20,13 +20,12 @@ function Expenses(props) {
 
 
 
-            {props.items.map((el, idx) => {
+            {props.items.map((expense) => {
                 return (
                     <ExpenseItem
-                        key={idx}
-                        title={el.title}
-                        amount={el.amount}
-                        date={el.date}>
+                        title={expense.title}
+                        amount={expense.amount}
+                        date={expense.date}>
                     </ExpenseItem>
                 )
             })}
